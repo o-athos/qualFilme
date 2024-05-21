@@ -41,9 +41,7 @@ trieNode* searchPrefix (trieNode *root, const char *prefix){
         current = current->children[index];
     }
 
-    if (current->children[index] != NULL)
-        return current;     // Nodo final
-    return NULL;
+    return current;
 }
 
 void printTitles(trieNode* root, FILE *output){
