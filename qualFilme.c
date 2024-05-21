@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "trie.h"
+#include "padronizaString.h"
 
 int main (int argc, char *argv[]){
     if (argc != 4){
@@ -22,7 +23,7 @@ int main (int argc, char *argv[]){
 
     //Ler cada linha de filmes.txt e insere na trie cada nome de filme
     while (fgets(buffer, sizeof(buffer), moviesFile)){
-        result = padronizaString(buffer); // FALTA ADD ESSE ARQUIVO COM ESSA FUNCAO Q A PROF DEU
+        result = padronizaString(buffer); 
         insereTrie(result);
     }
 
