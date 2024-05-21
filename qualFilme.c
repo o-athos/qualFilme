@@ -56,7 +56,7 @@ int main (int argc, char *argv[]){
                     fprintf(outputFile, "nodo nao encontrado\n");
                     return;
                 }
-                // Printar tudo a partir de 'node' da trie: printTitles(node, output)
+                printTitles(node, outputFile);
                 break;
             }
             case 'l':{

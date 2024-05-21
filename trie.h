@@ -22,5 +22,7 @@ void insertWord (trieNode* root, const char *word);
 
 trieNode* searchPrefix (trieNode* root, const char *prefix);
 
+void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output);
+
 void printTitles (trieNode *root, FILE *output);
 
