@@ -7,9 +7,7 @@
                 (c == ' ')  ? 1 : \
                 (c >= '0' && c <= '9') ? (c - '0' + 2) : \
                 (c >= 'a' && c <= 'z') ? (c - 'a' + 12) : \
-                (c == '?') ? 38)
-
-
+                (c == '?') ? 38 : -1)
 
 typedef struct trieNode{
     struct trieNode *children[NUM_CHAR];

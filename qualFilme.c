@@ -24,7 +24,7 @@ int main (int argc, char *argv[]){
     //Ler cada linha de filmes.txt e insere na trie cada nome de filme
     while (fgets(buffer, sizeof(buffer), moviesFile)){
         result = padronizaString(buffer); 
-        insereTrie(result);
+        insertWord(root, result);
     }
 
     //Fecha arquivo filmes.txt
@@ -55,7 +55,7 @@ int main (int argc, char *argv[]){
                 trieNode* node = searchPrefix(root, query);
                 if (node == NULL){
                     fprintf(outputFile, "nodo nao encontrado\n");
-                    return;
+                    return 1;
                 }
                 printTitles(node, outputFile);
                 break;

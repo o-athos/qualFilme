@@ -16,7 +16,7 @@ trieNode* createNode() {
 void insertWord (trieNode *root, const char *word){
     trieNode *current = root;
 
-    for (int i = 0; i < strlen(word); i++){
+    for (size_t i = 0; i < strlen(word); i++){
         int index = indC(word[i]);
 
         if (current->children[index] == NULL){
@@ -31,9 +31,9 @@ void insertWord (trieNode *root, const char *word){
 // Função que procura por um prefixo, retorna o nodo
 trieNode* searchPrefix (trieNode *root, const char *prefix){
     trieNode *current = root;
-    int index;
+    long unsigned int index;
     
-    for (int i = 0; i < strlen(prefix); i++){
+    for (size_t i = 0; i < strlen(prefix); i++){
         index = indC(prefix[i]);
         if (current->children[index] == NULL){
             printf("titulo nao encontrado");
