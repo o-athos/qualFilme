@@ -12,7 +12,7 @@ trieNode* createNode() {
     return node;
 }
 
-void insertWord (trieNode *root, char *word){
+void insertWord (trieNode *root, const char *word){
     trieNode *current = root;
 
     for (int i = 0; i < strlen(word); i++){
@@ -27,11 +27,12 @@ void insertWord (trieNode *root, char *word){
     current->children[indC('\0')] = createNode();
 }
 
-trieNode* searchPrefix (trieNode *root, char *prefix){
+trieNode* searchPrefix (trieNode *root, const char *prefix){
     trieNode *current = root;
-
-    for (int i = 0; i < strlen(word); i++){
-        index = indC(word[i]);
+    int index;
+    
+    for (int i = 0; i < strlen(prefix); i++){
+        index = indC(prefix[i]);
         if (current->children[index] == NULL){
             printf("titulo nao encontrado");
             return NULL;
@@ -43,5 +44,13 @@ trieNode* searchPrefix (trieNode *root, char *prefix){
     if (current->children[index] != NULL)
         return current;     // Nodo final
     return NULL;
+}
+
+void printTitles(trieNode* root, FILE *output){
+
+
+
+    
+
 }
 

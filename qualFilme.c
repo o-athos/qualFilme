@@ -50,15 +50,28 @@ int main (int argc, char *argv[]){
     while (fgets(line, sizeof(line), queryFile) != NULL){
         sscanf(line, " %c %[^\n]", &queryType, query);      //Coloca o primeiro caract em queryType e o resto em query
         switch(queryType){
-            case 'p':
+            case 'p': {
+                trieNode* node = searchPrefix(root, query);
+                if (node == NULL){
+                    fprintf(outputFile, "nodo nao encontrado\n");
+                    return;
+                }
+                // Printar tudo a partir de 'node' da trie: printTitles(node, output)
+                break;
+            }
+            case 'l':{
+                // achar o titulo de filme mais longo que seja prefixo do filme x
+
+
+            }
 
 
 
-            case 'l':
-
-
-
-            case 'c':
+            case 'c':{
+                /* cuidar pois nesse caso o query terá caracteres coringas 
+                como: *filme* ou filme.. e será um método para cada.
+                Terá q analisar para ver qual caso eh, e ver como implementa isso.   */
+            }
 
 
 

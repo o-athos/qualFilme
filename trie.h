@@ -20,7 +20,7 @@ trieNode* createNode();
 
 void insertWord (trieNode* root, const char *word);
 
-void searchPrefix (trieNode* root, const char *prefix);
+trieNode* searchPrefix (trieNode* root, const char *prefix);
 
-void printTitles (trieNode *root);
+void printTitles (trieNode *root, FILE *output);
 
