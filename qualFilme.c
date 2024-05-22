@@ -48,25 +48,24 @@ int main (int argc, char *argv[]){
     char query[256];    // string a ser pesquisada. Ex: 19.., *christmas*
     char line[256];     // linha do arquivo consulta.txt
 
-    printTitles(root, outputFile);
+    //printTitles(root, outputFile);
     while (fgets(line, sizeof(line), queryFile) != NULL){
-        sscanf(line, " %c %[^\n]", &queryType, query);      //Coloca o primeiro caract em queryType e o resto em query
+        sscanf(line, " %c %[^\n]", &queryType, query);     //Coloca o primeiro caract em queryType e o resto em query
         switch(queryType){
             case 'p': {
-                printf("5\n");
-                trieNode* node = searchPrefix(root, query);
-                printf("6\n");
+                char *queryAdjusted = padronizaString(query);
+                trieNode* node = searchPrefix(root, queryAdjusted);
                 if (node == NULL){
                     fprintf(outputFile, "nodo nao encontrado\n");
                     return 1;
                 }
-                printTitles(node, outputFile);
+                fprintf(outputFile, "%c %s\n", queryType, query);
+                printTitles(node, outputFile, queryAdjusted);
                 break;
             }
             case 'l':{
                 // achar o titulo de filme mais longo que seja prefixo do filme x
-
-
+                break;
             }
 
 
@@ -75,16 +74,16 @@ int main (int argc, char *argv[]){
                 /* cuidar pois nesse caso o query terá caracteres coringas 
                 como: *filme* ou filme.. e será um método para cada.
                 Terá q analisar para ver qual caso eh, e ver como implementa isso.   */
+                break;
             }
 
 
 
             default:
-                printf("Opção de pesquisa inválida");
+                printf("Opção de pesquisa inválida\n");
         }
     }
 
-    printf("fim\n");
     fclose(outputFile);
     fclose(queryFile);
 

@@ -8,7 +8,7 @@
                 (c >= '0' && c <= '9') ? (c - '0' + 2) : \
                 (c >= 'a' && c <= 'z') ? (c - 'a' + 12) : \
                 (c == '?') ? 38 : -1)
-                
+
 #define indexToChar(i) ((i == 0) ? '\0' : \
                        (i == 1) ? ' ' : \
                        (i >= 2 && i <= 11) ? ('0' + (i - 2)) : \
@@ -26,7 +26,7 @@ void insertWord (trieNode* root, const char *word);
 
 trieNode* searchPrefix (trieNode* root, const char *prefix);
 
-void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output);
+void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output, const char *prefix);
 
-void printTitles (trieNode *root, FILE *output);
+void printTitles (trieNode *root, FILE *output, const char *prefix);
 
