@@ -37,14 +37,14 @@ trieNode* searchPrefix (trieNode *root, const char *prefix){
     for (size_t i = 0; i < strlen(prefix); i++){
         printf("dentro do for 2\n");
         index = indC(prefix[i]);
-        if (current->children[index] == NULL){
+        printf("eh aqui\n");
+        if (current->children[index] == NULL){          // ESSA COMPARAÇÂO CAUSA FALHA
             printf("titulo nao encontrado");
             return NULL;
         }
-
+        printf("passou\n");
         current = current->children[index];
     }
-
     return current;
 }
 
@@ -54,13 +54,12 @@ void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output) {
 
     if (node->children[indC('\0')] != NULL) {
         buffer[depth] = '\0';
-        printf("\n");
+        printf("%s\n", buffer);   // PARA DEBBUG
         fprintf(output, "%s\n", buffer);
     }
 
-    for (int i = 1; i < NUM_CHAR; i++) {
+    for (int i = 0; i < NUM_CHAR; i++) {
         if (node->children[i] != NULL) {
-            printf("%c", indexToChar(i));
             buffer[depth] = indexToChar(i);
             printTitlesRec(node->children[i], buffer, depth + 1, output);
         }
