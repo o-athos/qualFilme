@@ -48,11 +48,14 @@ int main (int argc, char *argv[]){
     char query[256];    // string a ser pesquisada. Ex: 19.., *christmas*
     char line[256];     // linha do arquivo consulta.txt
 
+    printTitles(root, outputFile);
     while (fgets(line, sizeof(line), queryFile) != NULL){
         sscanf(line, " %c %[^\n]", &queryType, query);      //Coloca o primeiro caract em queryType e o resto em query
         switch(queryType){
             case 'p': {
+                printf("5\n");
                 trieNode* node = searchPrefix(root, query);
+                printf("6\n");
                 if (node == NULL){
                     fprintf(outputFile, "nodo nao encontrado\n");
                     return 1;
@@ -81,6 +84,7 @@ int main (int argc, char *argv[]){
         }
     }
 
+    printf("fim\n");
     fclose(outputFile);
     fclose(queryFile);
 

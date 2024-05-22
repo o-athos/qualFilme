@@ -32,8 +32,10 @@ void insertWord (trieNode *root, const char *word){
 trieNode* searchPrefix (trieNode *root, const char *prefix){
     trieNode *current = root;
     long unsigned int index;
-    
+    printf("dentro de searchPrefix 1\n");
+    printf("%s\n", prefix);
     for (size_t i = 0; i < strlen(prefix); i++){
+        printf("dentro do for 2\n");
         index = indC(prefix[i]);
         if (current->children[index] == NULL){
             printf("titulo nao encontrado");
@@ -52,12 +54,14 @@ void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output) {
 
     if (node->children[indC('\0')] != NULL) {
         buffer[depth] = '\0';
+        printf("\n");
         fprintf(output, "%s\n", buffer);
     }
 
     for (int i = 1; i < NUM_CHAR; i++) {
         if (node->children[i] != NULL) {
-            buffer[depth] = indC(i);
+            printf("%c", indexToChar(i));
+            buffer[depth] = indexToChar(i);
             printTitlesRec(node->children[i], buffer, depth + 1, output);
         }
     }
