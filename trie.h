@@ -30,3 +30,5 @@ void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output, const
 
 void printTitles (trieNode *root, FILE *output, const char *prefix);
 
+char* longestTitle (trieNode *root, const char *movie);
+

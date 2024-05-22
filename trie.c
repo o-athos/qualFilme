@@ -34,7 +34,7 @@ trieNode* searchPrefix (trieNode *root, const char *prefix){
     long unsigned int index;
     for (size_t i = 0; i < strlen(prefix); i++){
         index = indC(prefix[i]);
-        if (current->children[index] == NULL){          // ESSA COMPARAÇÂO CAUSA FALHA
+        if (current->children[index] == NULL){         
             printf("titulo nao encontrado");
             return NULL;
         }
@@ -64,4 +64,33 @@ void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output, const
 void printTitles(trieNode *root, FILE *output, const char *prefix) {
     char buffer[256];
     printTitlesRec(root, buffer, 0, output, prefix);
+}
+
+
+char* longestTitle (trieNode *root, const char *movie){
+    trieNode *current = root;
+    char* longestPrefix = (char *)malloc(256 * sizeof(char));
+    char* currentPrefix = (char *)malloc(256 * sizeof(char));
+    int currentLenght = 0;
+    int longestLenght = 0;
+
+    for (size_t i = 0; i < strlen(movie); i++){
+        int index = indC(movie[i]);
+
+        if (current->children[indC('\0')] != NULL){
+            if (longestLenght < currentLenght){
+                longestLenght = currentLenght;
+                strcpy(longestPrefix, currentPrefix);
+            }
+        }
+
+        if (current->children[index] == NULL){    
+            return longestPrefix;
+        }
+        currentPrefix[currentLenght] = movie[i];
+        currentLenght++;
+        current = current->children[index];
+    }
+    free(currentPrefix);
+    return longestPrefix;
 }

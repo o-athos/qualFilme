@@ -48,7 +48,6 @@ int main (int argc, char *argv[]){
     char query[256];    // string a ser pesquisada. Ex: 19.., *christmas*
     char line[256];     // linha do arquivo consulta.txt
 
-    //printTitles(root, outputFile);
     while (fgets(line, sizeof(line), queryFile) != NULL){
         sscanf(line, " %c %[^\n]", &queryType, query);     //Coloca o primeiro caract em queryType e o resto em query
         switch(queryType){
@@ -57,14 +56,27 @@ int main (int argc, char *argv[]){
                 trieNode* node = searchPrefix(root, queryAdjusted);
                 if (node == NULL){
                     fprintf(outputFile, "nodo nao encontrado\n");
-                    return 1;
                 }
-                fprintf(outputFile, "%c %s\n", queryType, query);
-                printTitles(node, outputFile, queryAdjusted);
+                else{
+                    fprintf(outputFile, "%c %s\n", queryType, query);
+                    printTitles(node, outputFile, queryAdjusted);  
+                }
+                free(queryAdjusted);
                 break;
             }
             case 'l':{
-                // achar o titulo de filme mais longo que seja prefixo do filme x
+                char *queryAdjusted = padronizaString(query);
+                char *longest = longestTitle(root, queryAdjusted);
+
+                if (longest == NULL){
+                    fprintf(outputFile, "filme nao encontrado\n");
+                }
+                else{
+                    fprintf(outputFile, "%c %s\n", queryType, query);
+                    fprintf(outputFile, "%s\n", longest);
+                }
+                free(queryAdjusted);
+                free(longest);
                 break;
             }
 
