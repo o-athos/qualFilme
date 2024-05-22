@@ -28,6 +28,18 @@ void insertWord (trieNode *root, const char *word){
     current->children[indC('\0')] = createNode();
 }
 
+void destroyTrie(trieNode* root){
+    if (root == NULL) return;
+
+    for (int i = 0; i < NUM_CHAR; i++) {
+        if (root->children[i] != NULL) {
+            destroyTrie(root->children[i]);
+        }
+    }
+
+    free(root);
+}   
+
 // Função que procura por um prefixo, retorna o nodo
 trieNode* searchPrefix (trieNode *root, const char *prefix){
     trieNode *current = root;

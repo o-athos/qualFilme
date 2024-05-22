@@ -98,6 +98,6 @@ int main (int argc, char *argv[]){
 
     fclose(outputFile);
     fclose(queryFile);
-
+    destroyTrie(root);
     return 0;
 }

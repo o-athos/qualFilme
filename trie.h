@@ -24,6 +24,8 @@ trieNode* createNode();
 
 void insertWord (trieNode* root, const char *word);
 
+void destroyTrie(trieNode* root);
+
 trieNode* searchPrefix (trieNode* root, const char *prefix);
 
 void printTitlesRec(trieNode *node, char *buffer, int depth, FILE *output, const char *prefix);
