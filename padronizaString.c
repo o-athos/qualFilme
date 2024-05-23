@@ -2,6 +2,11 @@
 
 char* padronizaString(char* entrada)
 {
+  if (entrada == NULL)
+    return NULL;
+  
+  setlocale(LC_ALL, "");
+
   size_t tam, wctam;
   wchar_t *letra, *palavra;
   char *nova, *p;
@@ -27,19 +32,25 @@ char* padronizaString(char* entrada)
     111, 110, 111, 111, 111, 111, 111,  63,  48, 117, 117, 117, 117, 121, 112, 121   // 240-255
     }; 
 
-  tam= strlen( entrada);
+  tam= strlen(entrada);
   wctam= (tam+1)*4;
   nova = (char*) malloc(tam+1);
-  palavra = (wchar_t*) malloc(wctam); 
+  palavra = (wchar_t*) malloc(wctam);
+  if (palavra == NULL || nova == NULL){
+    free(nova);
+    free(palavra);
+    return NULL;
+  }
   mbstowcs( palavra, entrada, wctam );
   p = nova; letra = palavra;
-  while (*letra != '\0')
+  while (*letra != '\0') {
     if(*letra >= 0 && *letra <= 255)
       *p++ = idx[*letra++];
     else{
       *p++ = 63;                     // coloca '?' nos caracteres fora do intervalo [0,255]
       letra++;
     }
+  }
   *p = '\0';
   free( palavra );
 

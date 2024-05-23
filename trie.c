@@ -48,6 +48,7 @@ trieNode* searchPrefix (trieNode *root, const char *prefix){
         index = indC(prefix[i]);
         if (current->children[index] == NULL){         
             printf("titulo nao encontrado");
+            //free(current);
             return NULL;
         }
         current = current->children[index];
@@ -80,9 +81,17 @@ void printTitles(trieNode *root, FILE *output, const char *prefix) {
 
 
 char* longestTitle (trieNode *root, const char *movie){
+    if (root == NULL || movie == NULL)
+        return NULL;
+    
     trieNode *current = root;
     char* longestPrefix = (char *)malloc(256 * sizeof(char));
     char* currentPrefix = (char *)malloc(256 * sizeof(char));
+    if (currentPrefix == NULL && longestPrefix == NULL) {
+        free(longestPrefix);
+        free(currentPrefix);
+        return NULL;
+    }
     int currentLenght = 0;
     int longestLenght = 0;
 
@@ -96,13 +105,16 @@ char* longestTitle (trieNode *root, const char *movie){
             }
         }
 
-        if (current->children[index] == NULL){    
-            return longestPrefix;
-        }
+        if (current->children[index] == NULL){  
+            break;
+        };
+        
         currentPrefix[currentLenght] = movie[i];
         currentLenght++;
+        currentPrefix[currentLenght] = '\0';
         current = current->children[index];
     }
+
     free(currentPrefix);
     return longestPrefix;
 }

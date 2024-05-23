@@ -23,7 +23,7 @@ int main (int argc, char *argv[]){
 
     //Ler cada linha de filmes.txt e insere na trie cada nome de filme
     while (fgets(buffer, sizeof(buffer), moviesFile)){
-        result = padronizaString(buffer); 
+        result = padronizaString(buffer);
         insertWord(root, result);
     }
 
@@ -65,8 +65,10 @@ int main (int argc, char *argv[]){
                 break;
             }
             case 'l':{
-                char *queryAdjusted = padronizaString(query);
-                char *longest = longestTitle(root, queryAdjusted);
+                char *queryAdjusted = (char *)malloc(256 * sizeof(char));
+                char *longest = (char *)malloc(256 * sizeof(char));
+                queryAdjusted = padronizaString(query);
+                longest = longestTitle(root, queryAdjusted);
 
                 if (longest == NULL){
                     fprintf(outputFile, "filme nao encontrado\n");
