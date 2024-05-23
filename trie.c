@@ -48,8 +48,6 @@ trieNode* searchPrefix (trieNode *root, const char *prefix){
     for (size_t i = 0; i < strlen(prefix); i++){   
         index = indC(prefix[i]);                    // pega a posição da letra a ser verificada
         if (current->children[index] == NULL){      // se nao existir um nodo na posiçaõ dessa letra, ela n foi inserida  
-            printf("titulo nao encontrado");
-            free(current);
             return NULL;
         }
         current = current->children[index];     // segue pra próxima letra
@@ -95,11 +93,13 @@ char* longestTitle (trieNode *root, const char *movie){
     }
     int currentLenght = 0;
     int longestLenght = 0;
+    int found = 0;
 
     for (size_t i = 0; i < strlen(movie); i++){
         int index = indC(movie[i]);             
 
         if (current->children[indC('\0')] != NULL){     //se chegou ao fim de um filme, verifica se eh o maior prefixo e atribui o novoMaior
+            found = 1;
             if (longestLenght < currentLenght){
                 longestLenght = currentLenght;
                 strcpy(longestPrefix, currentPrefix);
@@ -117,5 +117,8 @@ char* longestTitle (trieNode *root, const char *movie){
     }
 
     free(currentPrefix);
+    if (found)
+        return longestPrefix;
+    strcpy(longestPrefix, "filme nao econtrado");
     return longestPrefix;
 }

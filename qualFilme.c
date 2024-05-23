@@ -55,11 +55,12 @@ int main (int argc, char *argv[]){
             case 'p': {
                 char *queryAdjusted = padronizaString(query);
                 trieNode* node = searchPrefix(root, queryAdjusted);
+
+                fprintf(outputFile, "%c %s\n", queryType, query);
                 if (node == NULL){
-                    fprintf(outputFile, "nodo nao encontrado\n");
+                    fprintf(outputFile, "filme nao encontrado\n");
                 }
                 else{
-                    fprintf(outputFile, "%c %s\n", queryType, query);
                     printTitles(node, outputFile, queryAdjusted);  
                 }
                 free(queryAdjusted);
@@ -69,13 +70,9 @@ int main (int argc, char *argv[]){
                 char *queryAdjusted = padronizaString(query);
                 char *longest = longestTitle(root, queryAdjusted);
 
-                if (longest == NULL){
-                    fprintf(outputFile, "filme nao encontrado\n");
-                }
-                else{
-                    fprintf(outputFile, "%c %s\n", queryType, query);
-                    fprintf(outputFile, "%s\n", longest);
-                }
+                fprintf(outputFile, "%c %s\n", queryType, query);
+                fprintf(outputFile, "%s\n", longest);
+                
                 free(queryAdjusted);
                 free(longest);
                 break;
