@@ -122,3 +122,48 @@ char* longestTitle (trieNode *root, const char *movie){
     strcpy(longestPrefix, "filme nao econtrado");
     return longestPrefix;
 }
+
+void wildcardSearchRec(trieNode *node, const char *query, int pos, char *buffer, int depth, FILE *output) {
+    if (node == NULL) return;
+
+    // If we have reached the end of the query
+    if (query[pos] == '\0') {
+        if (node->children[indC('\0')] != NULL) {
+            buffer[depth] = '\0';
+            fprintf(output, "%s\n", buffer);
+        }
+        return;
+    }
+
+    if (query[pos] == '.') {
+        for (int i = 0; i < NUM_CHAR; i++) {
+            if (node->children[i] != NULL) {
+                buffer[depth] = indexToChar(i);
+                wildcardSearchRec(node->children[i], query, pos + 1, buffer, depth + 1, output);
+            }
+        }
+    }
+
+    else if (query[pos] == '*') {
+        wildcardSearchRec(node, query, pos + 1, buffer, depth, output);
+        for (int i = 0; i < NUM_CHAR; i++) {
+            if (node->children[i] != NULL) {
+                buffer[depth] = indexToChar(i);
+                wildcardSearchRec(node->children[i], query, pos, buffer, depth + 1, output);
+            }
+        }
+    }
+
+    else {
+        int index = indC(query[pos]);
+        if (node->children[index] != NULL) {
+            buffer[depth] = query[pos];
+            wildcardSearchRec(node->children[index], query, pos + 1, buffer, depth + 1, output);
+        }
+    }
+}
+
+void printWildcardMatches(trieNode *root, const char *query, FILE *output) {
+    char buffer[256];
+    wildcardSearchRec(root, query, 0, buffer, 0, output);
+}

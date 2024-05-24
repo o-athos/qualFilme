@@ -34,3 +34,7 @@ void printTitles (trieNode *root, FILE *output, const char *prefix);
 
 char* longestTitle (trieNode *root, const char *movie);
 
+void wildcardSearchRec(trieNode *node, const char *query, int pos, char *buffer, int depth, FILE *output);
+
+void printWildcardMatches(trieNode *root, const char *query, FILE *output);
+
