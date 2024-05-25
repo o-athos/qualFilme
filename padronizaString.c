@@ -68,3 +68,45 @@ char* padronizaString(char* entrada)
   *w= '\0';
   return nova;
 }
+
+
+char* padronizaCuringa(char* entrada){
+
+  char buffer[255];
+
+  int i = 0;
+  int j = 0;
+  while (entrada[i] != '\0'){
+
+    int contCoringa = 0;
+    while (entrada[i] == '*' || entrada[i] == '.'){
+      i++;
+      contCoringa++;
+    }
+
+    int pos = 0;
+    while (entrada[i] != '*' && entrada[i] != '.' && entrada[i] != '\0'){
+      buffer[pos++] = entrada[i];
+      i++;
+    }
+
+    buffer[pos] = '\0';
+
+    char* stringAjustada = padronizaString(buffer);
+    stringAjustada[(int)strlen(stringAjustada)] = ' ';     // ISSO AQUI Q TAVA FALTANDOOOOOOOOOOO, tive q imprimir em tabela ASCII p achar
+
+    j = j + contCoringa;
+    pos = 0;
+
+    while (j < i){
+      entrada[j] = stringAjustada[pos];
+      pos++;
+      j++;
+    }
+
+    free(stringAjustada);
+
+  }
+
+  return entrada;
+}

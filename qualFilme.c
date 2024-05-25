@@ -81,20 +81,14 @@ int main (int argc, char *argv[]){
 
 
             case 'c':{
-                /* cuidar pois nesse caso o query terá caracteres coringas 
-                como: *filme* ou filme.. e será um método para cada.
-                Terá q analisar para ver qual caso eh, e ver como implementa isso.   */
-                               // Handle wildcard searches
                 fprintf(outputFile, "%c %s\n", queryType, query);
-                //char *queryAdjusted = padronizaString(query);
-                printWildcardMatches(root, query, outputFile);
-                //free(query);
+
+                char *queryAdjusted = padronizaCuringa(query);
+                printWildcardMatches(root, queryAdjusted, outputFile);
             
                 break;
             }
-
-
-
+            
             default:
                 printf("Opção de pesquisa inválida\n");
         }

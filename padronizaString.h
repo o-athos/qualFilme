@@ -5,3 +5,5 @@
 #include <wchar.h>
 
 char* padronizaString(char* entrada);
+
+char* padronizaCuringa(char* entrada);
