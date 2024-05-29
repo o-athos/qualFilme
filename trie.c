@@ -126,7 +126,6 @@ char* longestTitle (trieNode *root, const char *movie){
 void wildcardSearchRec(trieNode *node, const char *query, int pos, char *buffer, int depth, FILE *output) {
     if (node == NULL) return;
 
-    // If we have reached the end of the query
     if (query[pos] == '\0') {
         if (node->children[indC('\0')] != NULL) {
             buffer[depth] = '\0';

@@ -69,7 +69,7 @@ char* padronizaString(char* entrada)
   return nova;
 }
 
-
+// função para padronizar a string sem alterar o '*' e '.'
 char* padronizaCuringa(char* entrada){
 
   char buffer[255];
@@ -96,14 +96,18 @@ char* padronizaCuringa(char* entrada){
     stringAjustada[(int)strlen(stringAjustada)] = ' ';     // ISSO AQUI Q TAVA FALTANDOOOOOOOOOOO, tive q imprimir em tabela ASCII p achar
 
     j = j + contCoringa;
+    
+    // Se a palavra começar com ' ', temos que garantir que o ' ' esteja no resultado, pois o padronizaString exclui o espaço no ínicio
+    if (buffer[0] == ' '){
+      entrada[j] = ' ';
+      j++;
+    }
     pos = 0;
-
     while (j < i){
       entrada[j] = stringAjustada[pos];
       pos++;
       j++;
     }
-
     free(stringAjustada);
 
   }
