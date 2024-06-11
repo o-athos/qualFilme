@@ -25,5 +25,5 @@ Além disso, a identificação do fim de uma palavra é feita através do caract
 ## Detalhe Padronização
 
 No tipo de busca com curinga o código padronizaString não foi eficaz, visto que no caso de, por exemplo: "*four *funeral", retornar "?four ?funeral".
-Podia-se apenas alterar o código para não colocar "?" no lugar de "." e "*", porém, não havia a certeza se poderia haver um filme com esses caracteres no cadastro.
-Por isso, foi feito um código PadronizaCuringa no qual essa padronização é feita passando pelo nome do filme e separando as palavras (pulando quando aparece "." ou "*").
+Podia-se apenas alterar o código para não colocar "?" no lugar de "." e "`*`", porém, não havia a certeza se poderia haver um filme com esses caracteres no cadastro.
+Por isso, foi feito um código PadronizaCuringa no qual essa padronização é feita passando pelo nome do filme e separando as palavras (pulando quando aparece "." ou "`*`").
