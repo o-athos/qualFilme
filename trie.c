@@ -126,34 +126,34 @@ char* longestTitle (trieNode *root, const char *movie){
 void wildcardSearchRec(trieNode *node, const char *query, int pos, char *buffer, int depth, FILE *output) {
     if (node == NULL) return;
 
-    if (query[pos] == '\0') {
-        if (node->children[indC('\0')] != NULL) {
+    if (query[pos] == '\0') {       // Se chegou ao final da query
+        if (node->children[indC('\0')] != NULL) {   // Verifica se este nodo marca o fim de uma palavra
             buffer[depth] = '\0';
             fprintf(output, "%s\n", buffer);
         }
         return;
     }
 
-    if (query[pos] == '.') {
-        for (int i = 0; i < NUM_CHAR; i++) {
-            if (node->children[i] != NULL) {
+    if (query[pos] == '.') {    // Se for um ponto
+        for (int i = 0; i < NUM_CHAR; i++) {    // Itera sobre todas as possíveis letras
+            if (node->children[i] != NULL) {    // Se a letra atual existe na trie
                 buffer[depth] = indexToChar(i);
                 wildcardSearchRec(node->children[i], query, pos + 1, buffer, depth + 1, output);
             }
         }
     }
 
-    else if (query[pos] == '*') {
+    else if (query[pos] == '*') {   // Se for asterisco
         wildcardSearchRec(node, query, pos + 1, buffer, depth, output);
         for (int i = 0; i < NUM_CHAR; i++) {
             if (node->children[i] != NULL) {
                 buffer[depth] = indexToChar(i);
-                wildcardSearchRec(node->children[i], query, pos, buffer, depth + 1, output);
+                wildcardSearchRec(node->children[i], query, pos, buffer, depth + 1, output);   // Chama recursivamente sem avançar na query, permitindo múltiplos caracteres
             }
         }
     }
 
-    else {
+    else {   // Se for letra normal
         int index = indC(query[pos]);
         if (node->children[index] != NULL) {
             buffer[depth] = query[pos];
