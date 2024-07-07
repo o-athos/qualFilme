@@ -93,7 +93,7 @@ char* padronizaCuringa(char* entrada){
     buffer[pos] = '\0';
 
     char* stringAjustada = padronizaString(buffer);
-    stringAjustada[(int)strlen(stringAjustada)] = ' ';     // ISSO AQUI Q TAVA FALTANDOOOOOOOOOOO, tive q imprimir em tabela ASCII p achar
+    stringAjustada[(int)strlen(stringAjustada)] = ' ';     // A falta disso causa erro por conta do marcador de fim de string
 
     j = j + contCoringa;
     

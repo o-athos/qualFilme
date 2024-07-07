@@ -8,7 +8,5 @@ qualFilme: qualFilme.c trie.c padronizaString.c
 
 clean:
 	-rm -f *.o 
-
-purge: clean
 	-rm -f qualFilme
 	-rm -f *.swp
